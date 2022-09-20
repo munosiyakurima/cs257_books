@@ -1,4 +1,20 @@
+NAME
+	books.py - displays information given a csv file of books
+
 SYNOPSIS
-	python3 books.py title...
-	python3 books.py author...
-	python3 books.py years...
+	python3 books.py title <S>
+	python3 books.py author <S>
+	python3 books.py years <A> <B>
+
+DESCRIPTION
+	title:
+		Given a search string S, print a list of books whose titles contain S (case-insensitive). Books may be sorted by title or by publication year.
+
+	author:
+		Given a search string S, prints a list of authors whose names contain S (case-insensitive). For each such author, prints a list of the author's books. Authors are printed in alphabetical order by surname, breaking ties by using given name (e.g. Ann Brown comes before Charlotte Brown).
+
+	years:
+		Given a range of years A to B, prints a list of books published between years A and B, inclusive. Books are printed in order of publication year.
+
+AUTHOR
+	Kyle Machalec and Muno Siyakurima
