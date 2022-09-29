@@ -9,6 +9,7 @@
 
 import csv
 
+
 class Author:
     def __init__(self, surname='', given_name='', birth_year=None, death_year=None):
         self.surname = surname
@@ -35,10 +36,13 @@ class Book:
         return self.title == other.title
 
 class BooksDataSource:
+    books = []
+    authors = []
+
     def __init__(self, books_csv_file_name):
         ''' The books CSV file format looks like this:
 
-                title,publication_year,author_description
+                title,publication_yea(r,author_description
 
             For example:
 
@@ -49,7 +53,21 @@ class BooksDataSource:
             suitable instance variables for the BooksDataSource object containing
             a collection of Author objects and a collection of Book objects.
         '''
-        pass
+        
+        with open(books_csv_file_name) as f:
+            reader = csv.reader(f)
+            for row in reader:
+                book = Book(row[0], row[1], row[2])
+                books.append(book)
+                split_authors = row[2].split()
+                if len(split_authors) == 3:
+                    split_dates = split_authors[2].split('-')
+                    author = Author(split_authors[1], split_authors[0], split_dates[0][-4:], split_dates[1][:4])
+                    authors.append(author)
+                elif len(split_authors) == 4:
+                    split_dates = split_authors[3].split('-')
+                    author = Author(split_authors[1] + " " + split_authors[2], split_authors[0], split_dates[0][-4:], split_dates[1][:4])
+                    authors.append(author)
 
     def authors(self, search_text=None):
         ''' Returns a list of all the Author objects in this data source whose names contain
@@ -57,6 +75,7 @@ class BooksDataSource:
             returns all of the Author objects. In either case, the returned list is sorted
             by surname, breaking ties using given name (e.g. Ann Brontë comes before Charlotte Brontë).
         '''
+        #
         return []
 
     def books(self, search_text=None, sort_by='title'):
@@ -71,7 +90,22 @@ class BooksDataSource:
                 default -- same as 'title' (that is, if sort_by is anything other than 'year'
                             or 'title', just do the same thing you would do for 'title')
         '''
-        return []
+        books_returned = []
+        if search_text == None:
+            books_returned = books
+        else:
+            for book in books:
+                if search_text.lower() in book.title.lower():
+                    books_returned.append(book)
+        
+        if sort_by == 'year':
+            books_returned
+        else:
+            books_returned
+
+        return books_returned
+
+
 
     def books_between_years(self, start_year=None, end_year=None):
         ''' Returns a list of all the Book objects in this data source whose publication
@@ -85,4 +119,12 @@ class BooksDataSource:
             should be included.
         '''
         return []
+
+
+def main():
+    BooksDataSource("tinybooks.csv")
+
+if __name__ == "__main__":
+    main()
+
 
