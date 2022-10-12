@@ -2,9 +2,10 @@ NAME
 	books.py - displays information given a csv file of books
 
 SYNOPSIS
-	python3 books.py title [-t | -y | -h] S
-	python3 books.py author [-h] S
-	python3 books.py years [-h] A B
+	python3 books.py title [-t | -y] <search_string>
+	python3 books.py author <search_string>
+	python3 books.py years <start_date|none> <end_date|none>
+	python3 books.py -h
 
 DESCRIPTION
 	title:
@@ -16,10 +17,10 @@ DESCRIPTION
 	years:
 		Given a range of years A to B, prints a list of books published between years A and B, inclusive. Books are printed in order of publication year.
 
-OPTIONS
+	-h:
+		Prints the usage.txt file
 
-General:
-	-h, --help  Prints the usage statement of the CLI
+OPTIONS
 
 Title options:
 	-t, --title Prints out a list of books sorted by the title in alphabetical order. (DEFAULT)
